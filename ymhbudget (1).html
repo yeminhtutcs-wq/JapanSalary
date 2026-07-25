@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🇲🇲 ဂျပန်ရောက်မြန်မာများအတွက် ဝင်ငွေထွက်ငွေစီမံခန့်ခွဲမှု 🇯🇵</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --primary: #4f46e5;
+      --text: #ffffff;
+      --text-sub: #a1a1aa;
+      --border: #3f3f46;
+      --danger: #ef4444;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text);
+      margin: 0;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      min-height: 95vh;
+    }
+    
+    /* Title Header အလှဆင်ထားသော Styling */
+    .main-title {
+      text-align: center;
+      color: #38bdf8;
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      line-height: 1.5;
+      padding: 10px 15px;
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 15px;
+      flex: 1;
+    }
+    .hidden { display: none !important; }
+    h2, h3 { margin-top: 0; text-align: center; }
+    
+    /* Layout Centered Title & Bottom Right Exchange Rate Box */
+    .title-center-large {
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .rate-section-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 15px;
+    }
+
+    .rate-box-top {
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .rate-hint-text {
+      color: #ef4444;
+      font-size: 11px;
+      margin-bottom: 4px;
+      font-weight: normal;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .rate-box-top label {
+      color: #ffffff;
+      font-size: 12px;
+      margin-bottom: 4px;
+      display: block;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .rate-box-top input {
+      padding: 6px;
+      font-size: 14px;
+      text-align: center;
+      border: 1px solid var(--border);
+      color: #ffffff;
+      background: #27272a;
+      border-radius: 6px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .user-tag {
+      text-align: center;
+      color: #38bdf8;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    /* Tab Design */
+    .tab-container {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      background: none;
+      border: none;
+      color: var(--text-sub);
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-top: 0;
+    }
+    .tab-btn.active-tab {
+      color: #38bdf8;
+      border-bottom-color: #38bdf8;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+      position: relative;
+    }
+    label { display: block; font-size: 14px; margin-bottom: 6px; color: var(--text-sub); }
+    
+    .pw-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #27272a;
+      color: #fff;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+    .pw-wrapper input {
+      padding-right: 40px;
+    }
+    .eye-icon {
+      position: absolute;
+      right: 12px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      font-size: 15px;
+    }
+    .btn-login { background: var(--primary); }
+    .btn-register { background: var(--success); }
+    .btn-secondary { background: #3f3f46; }
+    .btn-danger { background: var(--danger); }
+
+    .row { display: flex; gap: 10px; align-items: flex-start; }
+    .row > div { flex: 1; }
+    
+    .result-box {
+      background: #27272a;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+    .highlight { color: #38bdf8; font-weight: bold; }
+    .history-card {
+      background: #27272a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .history-detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed #3f3f46;
+      font-size: 13px;
+      color: #d4d4d8;
+    }
+    .history-kyats-dim {
+      color: #9ca3af;
+      font-size: 11px;
+      opacity: 0.8;
+      margin-left: 4px;
+    }
+
+    /* Page 2 Helper Styles */
+    .field-footer-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-top: 4px;
+      padding: 0 2px;
+    }
+    .sub-rem { color: #71717a; }
+    .sub-mmk { color: #38bdf8; text-align: right; font-weight: bold; }
+    .sub-dim-mmk { color: #38bdf8; font-size: 12px; margin-top: 4px; font-weight: bold; }
+
+    /* Delete Button for Page 3 */
+    .btn-delete-row {
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 0;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-credit {
+      text-align: center;
+      font-size: 11px;
+      color: #71717a;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- App Main Header -->
+  <div class="main-title">🇲🇲 ဂျပန်ရောက်မြန်မာများအတွက် ဝင်ငွေထွက်ငွေစီမံခန့်ခွဲမှု 🇯🇵</div>
+
+  <!-- PAGE 1: LOGIN / REGISTER -->
+  <div id="page1" class="card">
+    <div class="tab-container">
+      <button id="loginTab" class="tab-btn active-tab" onclick="switchAuthTab('login')">Login (အကောင့်ဝင်ရန်)</button>
+      <button id="registerTab" class="tab-btn" onclick="switchAuthTab('register')">Register (အကောင့်သစ်ဖွင့်ရန်)</button>
+    </div>
+
+    <div class="input-group">
+      <label>Name (အမည်)</label>
+      <input type="text" id="username" placeholder="အမည်ရိုက်ထည့်ပါ">
+    </div>
+    
+    <div class="input-group">
+      <label>Password (ဂဏန်း ၆ လုံး)</label>
+      <div class="pw-wrapper">
+        <input type="password" id="password" maxlength="6" placeholder="******">
+        <span class="eye-icon" onclick="togglePassword()">👁️</span>
+      </div>
+    </div>
+
+    <div id="loginSection">
+      <button class="btn-login" onclick="handleLogin()">Login (ဝင်မည်)</button>
+    </div>
+
+    <div id="registerSection" class="hidden">
+      <button class="btn-register" onclick="handleRegister()">Register (အကောင့်သစ်ပြုလုပ်မည်)</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2: MONTHLY SALARY & EXPENSES -->
+  <div id="page2" class="card hidden">
+    <div class="user-tag" id="userTagP2">အကောင့်အမည်: </div>
+    
+    <!-- Centered Header -->
+    <div class="title-center-large">လစဉ်ဝင်ငွေနှင့် အသုံးစရိတ်</div>
+
+    <!-- Bottom Right Exchange Rate Box with Small Hint Text -->
+    <div class="rate-section-wrapper">
+      <div class="rate-box-top">
+        <div class="rate-hint-text">ဒီနေ့ပေါက်စျေးရိုက်ထည့်ပေးပါ</div>
+        <label>1 Yen = Kyats</label>
+        <input type="number" id="exchangeRate" value="22" oninput="calculatePage2()" placeholder="22">
+      </div>
+    </div>
+    
+    <div class="input-group">
+      <label>လ နှင့် ခုနှစ် ရွေးပါ</label>
+      <input type="month" id="selectedMonth">
+    </div>
+
+    <div class="input-group">
+      <label>အသားတင်ဝင်ငွေ (Yen)</label>
+      <input type="number" id="netIncome" oninput="calculatePage2()" placeholder="0">
+      <div class="sub-dim-mmk">(<span id="incomeMMK">0</span> Kyats)</div>
+    </div>
+
+    <hr style="border-color: var(--border); margin: 15px 0;">
+
+    <!-- အထွေထွေသုံးစရိတ် -->
+    <div class="input-group">
+      <label>အထွေထွေသုံးစရိတ် (Yen)</label>
+      <input type="number" id="generalExpense" oninput="calculatePage2()" placeholder="0">
+      <div class="field-footer-info">
+        <span class="sub-rem">ကျန်ငွေ: <span id="remAfterGen">0</span> Yen</span>
+        <span class="sub-mmk">(<span id="genMMK">0</span> Kyats)</span>
+      </div>
+    </div>
+
+    <!-- အိမ်ပေးငွေ -->
+    <div class="input-group">
+      <label>အိမ်ပေးငွေ (Yen)</label>
+      <input type="number" id="homeExpense" oninput="calculatePage2()" placeholder="0">
+      <div class="field-footer-info">
+        <span class="sub-rem">ကျန်ငွေ: <span id="remAfterHome">0</span> Yen</span>
+        <span class="sub-mmk">(<span id="homeMMK">0</span> Kyats)</span>
+      </div>
+    </div>
+
+    <!-- အရေးပေါ်သုံးငွေ -->
+    <div class="input-group">
+      <label>အရေးပေါ်သုံးငွေ (Yen)</label>
+      <input type="number" id="emergencyExpense" oninput="calculatePage2()" placeholder="0">
+      <div class="field-footer-info">
+        <span class="sub-rem">ကျန်ငွေ: <span id="remAfterEmerg">0</span> Yen</span>
+        <span class="sub-mmk">(<span id="emergMMK">0</span> Kyats)</span>
+      </div>
+    </div>
+
+    <!-- စုငွေ -->
+    <div class="input-group">
+      <label>စုငွေ (Yen)</label>
+      <input type="number" id="savings" oninput="calculatePage2()" placeholder="0">
+      <div class="field-footer-info">
+        <span class="sub-rem">ကျန်ငွေ: <span id="remAfterSave">0</span> Yen</span>
+        <span class="sub-mmk">(<span id="saveMMK">0</span> Kyats)</span>
+      </div>
+    </div>
+
+    <h3>ငွေလဲတွက်စက်</h3>
+    <div class="row">
+      <div class="input-group">
+        <label>Yen -> Kyats</label>
+        <input type="number" id="calcYen" oninput="convertYenToMMK()" placeholder="Yen">
+        <small>Kyats: <span id="outMMK" class="highlight">0</span></small>
+      </div>
+      <div class="input-group">
+        <label>Kyats -> Yen</label>
+        <input type="number" id="calcMMK" oninput="convertMMKToYen()" placeholder="Kyats">
+        <small>Yen: <span id="outYen" class="highlight">0</span></small>
+      </div>
+    </div>
+
+    <button class="btn-register" onclick="submitPage2()">Submit (သိမ်းဆည်းမည်)</button>
+    <button class="btn-login" onclick="goToPage3()">တနေ့တာအသုံးစရိတ်မှတ်ရန် (Next)</button>
+    <button class="btn-secondary" style="margin-top: 15px;" onclick="logout()">Logout (ထွက်မည်)</button>
+  </div>
+
+  <!-- PAGE 3: DAILY EXPENSES -->
+  <div id="page3" class="card hidden">
+    <h2>တနေ့တာ အသုံးစရိတ်</h2>
+    <div class="input-group">
+      <label>ရက်စွဲ</label>
+      <input type="date" id="dailyDate">
+    </div>
+
+    <div id="dailyItems">
+      <div class="daily-item-wrapper" style="margin-bottom: 12px;">
+        <div class="row">
+          <div class="input-group" style="flex: 2; margin-bottom: 0;">
+            <label>မှတ်စု (ဥပမာ- ထမင်းဖိုး)</label>
+            <input type="text" class="d-note" placeholder="အကြောင်းအရာ">
+          </div>
+          <div class="input-group" style="flex: 1; margin-bottom: 0;">
+            <label>ပမာဏ (Yen)</label>
+            <input type="number" class="d-amount" oninput="calcDaily()" placeholder="0">
+          </div>
+        </div>
+        <div style="text-align: right; font-size: 12px; color: #9ca3af; margin-top: 4px;">
+          <span class="d-mmk-text">(0 Kyats)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-box">
+      <div style="font-size: 16px; font-weight: bold; color: #fff;">
+        စုစုပေါင်း: <span id="dailyTotalYen" class="highlight">0</span> Yen
+      </div>
+      <div style="font-size: 12px; color: #9ca3af; opacity: 0.8; margin-top: 2px;">
+        (<span id="dailyTotalMMK">0</span> Kyats)
+      </div>
+    </div>
+
+    <button class="btn-secondary" onclick="addDailyRow()">+ Add (အခြား အသုံးစရိတ်ထပ်ထည့်ရန်)</button>
+    
+    <div class="row" style="margin-top: 8px;">
+      <button class="btn-secondary" style="flex: 1;" onclick="goToPage2()">Back</button>
+      <button class="btn-register" style="flex: 2;" onclick="submitPage3()">Submit (သိမ်းဆည်းမည်)</button>
+    </div>
+
+    <button class="btn-login" style="margin-top: 10px;" onclick="goToHistory()">History ကြည့်ရန်</button>
+  </div>
+
+  <!-- USER HISTORY PAGE -->
+  <div id="historyPage" class="card hidden">
+    <h2>သိမ်းဆည်းထားသော မှတ်တမ်းများ (History)</h2>
+    <p style="text-align:center; margin-bottom: 10px;">အကောင့်အမည်: <b id="histUser" class="highlight"></b></p>
+    
+    <div class="tab-container">
+      <button id="tabDaily" class="tab-btn active-tab" onclick="switchHistoryTab('daily')">📅 တနေ့တာအသုံးစရိတ်</button>
+      <button id="tabMonthly" class="tab-btn" onclick="switchHistoryTab('monthly')">🗓️ လစဉ်ဝင်ငွေနှင့် အသုံးစရိတ်</button>
+    </div>
+
+    <div id="historyDailyContent"></div>
+    <div id="historyMonthlyContent" class="hidden"></div>
+
+    <button class="btn-secondary" style="margin-top: 15px;" onclick="goToPage3()">Back</button>
+  </div>
+
+  <!-- ADMIN PANEL PAGE -->
+  <div id="adminPage" class="card hidden">
+    <h2>👑 Admin Dashboard</h2>
+    <p style="text-align:center; margin-bottom: 15px;">Welcome, <b class="highlight">Admin (YEMINHTUT1315)</b></p>
+    
+    <div class="input-group">
+      <label style="color:#38bdf8; font-weight:bold;">👤 User ရွေးချယ်ပါ</label>
+      <select id="adminUserSelect" onchange="renderSelectedUserAdminData()">
+        <option value="">-- User တစ်ဦး ရွေးချယ်ပါ --</option>
+      </select>
+    </div>
+
+    <div id="adminSelectedUserDetail" class="hidden" style="margin-top: 15px;">
+      <div style="background:#27272a; padding:12px; border-radius:8px; border-left:4px solid #f59e0b; margin-bottom:15px;">
+        🔑 Password: <b id="adminUserPw" style="color:#f59e0b; font-size:16px;"></b>
+      </div>
+
+      <div class="tab-container">
+        <button id="adminTabDaily" class="tab-btn active-tab" onclick="switchAdminTab('daily')">📅 တနေ့တာအသုံးစရိတ်</button>
+        <button id="adminTabMonthly" class="tab-btn" onclick="switchAdminTab('monthly')">🗓️ လစဉ်ဝင်ငွေနှင့် အသုံးစရိတ်</button>
+      </div>
+
+      <div id="adminDailyContent"></div>
+      <div id="adminMonthlyContent" class="hidden"></div>
+    </div>
+
+    <button class="btn-secondary" style="margin-top: 20px;" onclick="logout()">Logout (ထွက်မည်)</button>
+  </div>
+
+  <div class="footer-credit">Design By Ye Min Htut</div>
+
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AiZaSyAgTG4rY2M-KSW4etFKQ5KrgAam5QSQOw",
+    authDomain: "japan-ae493.firebaseapp.com",
+    databaseURL: "https://japan-ae493-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "japan-ae493",
+    storageBucket: "japan-ae493.firebasestorage.app",
+    messagingSenderId: "543493291625",
+    appId: "1:543493291625:web:e12b5bf95364fdfe62cf8"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  let currentUser = "";
+  const ADMIN_NAME = "YEMINHTUT1315";
+  const ADMIN_PW = "085399";
+  let adminAllUsers = {};
+  let adminAllRecords = {};
+
+  // Window Load - Check Saved Credentials
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedUser = localStorage.getItem('saved_username');
+    const savedPw = localStorage.getItem('saved_password');
+    if (savedUser && savedPw) {
+      document.getElementById('username').value = savedUser;
+      document.getElementById('password').value = savedPw;
+    }
+  });
+
+  function switchAuthTab(mode) {
+    const lTab = document.getElementById('loginTab');
+    const rTab = document.getElementById('registerTab');
+    const lSec = document.getElementById('loginSection');
+    const rSec = document.getElementById('registerSection');
+
+    if (mode === 'login') {
+      lTab.className = 'tab-btn active-tab';
+      rTab.className = 'tab-btn';
+      lSec.classList.remove('hidden');
+      rSec.classList.add('hidden');
+    } else {
+      lTab.className = 'tab-btn';
+      rTab.className = 'tab-btn active-tab';
+      lSec.classList.add('hidden');
+      rSec.classList.remove('hidden');
+    }
+  }
+
+  function showPage(pageId) {
+    ['page1', 'page2', 'page3', 'historyPage', 'adminPage'].forEach(p => {
+      document.getElementById(p).classList.add('hidden');
+    });
+    document.getElementById(pageId).classList.remove('hidden');
+  }
+
+  function togglePassword() {
+    const pw = document.getElementById('password');
+    pw.type = pw.type === 'password' ? 'text' : 'password';
+  }
+
+  function handleRegister() {
+    const name = document.getElementById('username').value.trim();
+    const pw = document.getElementById('password').value.trim();
+
+    if (!name || pw.length !== 6 || isNaN(pw)) {
+      alert("ကျေးဇူးပြု၍ Name ထည့်ပါ၊ Password ကို ဂဏန်း ၆ လုံး သီးသန့်ရိုက်ပါ။");
+      return;
+    }
+
+    if (name === ADMIN_NAME) {
+      alert("ဒီ Name အား Admin အတွက် သီးသန့်သတ်မှတ်ထားပါသည်။");
+      return;
+    }
+
+    db.ref('users/' + name).once('value', snapshot => {
+      if (snapshot.exists()) {
+        alert("ဒီ Name နဲ့ အကောင့်ရှိပြီးသားဖြစ်ပါသည်။ အခြား Name ပြောင်းသုံးပါ။");
+      } else {
+        db.ref('users/' + name).set({ password: pw }, err => {
+          if (!err) {
+            alert("အကောင့်သစ်ဖွင့်ခြင်း အောင်မြင်ပါသည်။ Login ဝင်နိုင်ပါပြီ။");
+            switchAuthTab('login');
+          }
+        });
+      }
+    });
+  }
+
+  function handleLogin() {
+    const name = document.getElementById('username').value.trim();
+    const pw = document.getElementById('password').value.trim();
+
+    if (name === ADMIN_NAME && pw === ADMIN_PW) {
+      currentUser = ADMIN_NAME;
+      showPage('adminPage');
+      loadAdminDashboard();
+      return;
+    }
+
+    db.ref('users/' + name).once('value', snapshot => {
+      if (snapshot.exists() && snapshot.val().password === pw) {
+        currentUser = name;
+        
+        // Save Credentials to LocalStorage
+        localStorage.setItem('saved_username', name);
+        localStorage.setItem('saved_password', pw);
+
+        document.getElementById('userTagP2').innerText = "အကောင့်အမည်: " + currentUser;
+        showPage('page2');
+        loadUserDraftData();
+      } else {
+        alert("Name သို့မဟုတ် Password မှားယွင်းနေပါသည်။");
+      }
+    });
+  }
+
+  /* --- AUTO SAVE STATE (LOCALSTORAGE) WITH PAGE 3 DRAFTS --- */
+  function autoSaveUserDraft() {
+    if (!currentUser || currentUser === ADMIN_NAME) return;
+
+    const dailyItemsData = [];
+    document.querySelectorAll('#dailyItems .daily-item-wrapper').forEach(wrapper => {
+      const noteInput = wrapper.querySelector('.d-note');
+      const amtInput = wrapper.querySelector('.d-amount');
+      const note = noteInput ? noteInput.value : '';
+      const amount = amtInput ? amtInput.value : '';
+      dailyItemsData.push({ note, amount });
+    });
+
+    const draft = {
+      selectedMonth: document.getElementById('selectedMonth').value,
+      netIncome: document.getElementById('netIncome').value,
+      exchangeRate: document.getElementById('exchangeRate').value,
+      generalExpense: document.getElementById('generalExpense').value,
+      homeExpense: document.getElementById('homeExpense').value,
+      emergencyExpense: document.getElementById('emergencyExpense').value,
+      savings: document.getElementById('savings').value,
+      dailyDate: document.getElementById('dailyDate').value,
+      dailyItems: dailyItemsData
+    };
+
+    localStorage.setItem(`draft_${currentUser}`, JSON.stringify(draft));
+  }
+
+  function loadUserDraftData() {
+    if (!currentUser || currentUser === ADMIN_NAME) return;
+
+    const draft = JSON.parse(localStorage.getItem(`draft_${currentUser}`));
+    if (draft) {
+      if (draft.selectedMonth) document.getElementById('selectedMonth').value = draft.selectedMonth;
+      if (draft.netIncome) document.getElementById('netIncome').value = draft.netIncome;
+      if (draft.exchangeRate !== undefined && draft.exchangeRate !== "") document.getElementById('exchangeRate').value = draft.exchangeRate;
+      if (draft.generalExpense) document.getElementById('generalExpense').value = draft.generalExpense;
+      if (draft.homeExpense) document.getElementById('homeExpense').value = draft.homeExpense;
+      if (draft.emergencyExpense) document.getElementById('emergencyExpense').value = draft.emergencyExpense;
+      if (draft.savings) document.getElementById('savings').value = draft.savings;
+      if (draft.dailyDate) document.getElementById('dailyDate').value = draft.dailyDate;
+
+      if (draft.dailyItems && draft.dailyItems.length > 0) {
+        const container = document.getElementById('dailyItems');
+        container.innerHTML = '';
+
+        draft.dailyItems.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = 'daily-item-wrapper';
+          div.style.marginBottom = '12px';
+          
+          const deleteBtnHTML = index === 0 ? '' : `<button class="btn-delete-row" onclick="removeDailyRow(this)">🗑️</button>`;
+
+          div.innerHTML = `
+            <div class="row">
+              <div class="input-group" style="flex: 2; margin-bottom: 0;">
+                ${index === 0 ? '<label>မှတ်စု (ဥပမာ- ထမင်းဖိုး)</label>' : ''}
+                <input type="text" class="d-note" placeholder="အကြောင်းအရာ" value="${item.note || ''}">
+              </div>
+              <div class="input-group" style="flex: 1; margin-bottom: 0;">
+                ${index === 0 ? '<label>ပမာဏ (Yen)</label>' : ''}
+                <input type="number" class="d-amount" oninput="calcDaily()" placeholder="0" value="${item.amount || ''}">
+              </div>
+              ${deleteBtnHTML}
+            </div>
+            <div style="text-align: right; font-size: 12px; color: #9ca3af; margin-top: 4px;">
+              <span class="d-mmk-text">(0 Kyats)</span>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      }
+    }
+    calculatePage2();
+    calcDaily();
+  }
+
+  document.addEventListener("input", function() {
+    autoSaveUserDraft();
+  });
+
+  function calculatePage2() {
+    const net = parseFloat(document.getElementById('netIncome').value) || 0;
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+
+    const gen = parseFloat(document.getElementById('generalExpense').value) || 0;
+    const home = parseFloat(document.getElementById('homeExpense').value) || 0;
+    const emerg = parseFloat(document.getElementById('emergencyExpense').value) || 0;
+    const save = parseFloat(document.getElementById('savings').value) || 0;
+
+    const incomeMMK = net * rate;
+    document.getElementById('incomeMMK').innerText = Math.round(incomeMMK).toLocaleString();
+
+    document.getElementById('genMMK').innerText = Math.round(gen * rate).toLocaleString();
+    document.getElementById('homeMMK').innerText = Math.round(home * rate).toLocaleString();
+    document.getElementById('emergMMK').innerText = Math.round(emerg * rate).toLocaleString();
+    document.getElementById('saveMMK').innerText = Math.round(save * rate).toLocaleString();
+
+    const rem1 = net - gen;
+    const rem2 = rem1 - home;
+    const rem3 = rem2 - emerg;
+    const rem4 = rem3 - save;
+
+    document.getElementById('remAfterGen').innerText = rem1.toLocaleString();
+    document.getElementById('remAfterHome').innerText = rem2.toLocaleString();
+    document.getElementById('remAfterEmerg').innerText = rem3.toLocaleString();
+    document.getElementById('remAfterSave').innerText = rem4.toLocaleString();
+  }
+
+  function convertYenToMMK() {
+    const yen = parseFloat(document.getElementById('calcYen').value) || 0;
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+    const mmk = yen * rate;
+    document.getElementById('outMMK').innerText = Math.round(mmk).toLocaleString();
+  }
+
+  function convertMMKToYen() {
+    const mmk = parseFloat(document.getElementById('calcMMK').value) || 0;
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+    const yen = rate > 0 ? mmk / rate : 0;
+    document.getElementById('outYen').innerText = Math.round(yen).toLocaleString();
+  }
+
+  function submitPage2() {
+    const month = document.getElementById('selectedMonth').value;
+    if (!month) { alert("လ နှင့် ခုနှစ် ရွေးပေးပါ"); return; }
+
+    const net = parseFloat(document.getElementById('netIncome').value) || 0;
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+    const gen = parseFloat(document.getElementById('generalExpense').value) || 0;
+    const home = parseFloat(document.getElementById('homeExpense').value) || 0;
+    const emerg = parseFloat(document.getElementById('emergencyExpense').value) || 0;
+    const save = parseFloat(document.getElementById('savings').value) || 0;
+    
+    const rem1 = net - gen;
+    const rem2 = rem1 - home;
+    const rem3 = rem2 - emerg;
+    const rem4 = rem3 - save;
+
+    const data = {
+      type: "Monthly Summary",
+      month: month,
+      netIncomeYen: net,
+      incomeKyats: Math.round(net * rate),
+      rate: rate,
+      generalExpenseYen: gen,
+      generalExpenseKyats: Math.round(gen * rate),
+      remAfterGen: rem1,
+      homeExpenseYen: home,
+      homeExpenseKyats: Math.round(home * rate),
+      remAfterHome: rem2,
+      emergencyExpenseYen: emerg,
+      emergencyExpenseKyats: Math.round(emerg * rate),
+      remAfterEmerg: rem3,
+      savingsYen: save,
+      savingsKyats: Math.round(save * rate),
+      remFinalYen: rem4,
+      timestamp: new Date().toLocaleString()
+    };
+
+    db.ref('records/' + currentUser).once('value', snapshot => {
+      let updates = {};
+      if (snapshot.exists()) {
+        snapshot.forEach(child => {
+          if (child.val().type === "Monthly Summary" && child.val().month === month) {
+            updates[child.key] = null;
+          }
+        });
+      }
+      
+      db.ref('records/' + currentUser).update(updates, () => {
+        db.ref('records/' + currentUser).push(data, err => {
+          if (!err) {
+            alert(month + " လအတွက် စာရင်းကို အသစ်ပြင်ဆင် သိမ်းဆည်းပြီးပါပြီ!");
+          }
+        });
+      });
+    });
+  }
+
+  function goToPage3() { showPage('page3'); }
+  function goToPage2() { showPage('page2'); }
+  function goToHistory() {
+    showPage('historyPage');
+    loadHistory();
+  }
+
+  function addDailyRow() {
+    const div = document.createElement('div');
+    div.className = 'daily-item-wrapper';
+    div.style.marginBottom = '12px';
+    div.innerHTML = `
+      <div class="row">
+        <div class="input-group" style="flex: 2; margin-bottom: 0;">
+          <input type="text" class="d-note" placeholder="အကြောင်းအရာ">
+        </div>
+        <div class="input-group" style="flex: 1; margin-bottom: 0;">
+          <input type="number" class="d-amount" oninput="calcDaily()" placeholder="0">
+        </div>
+        <button class="btn-delete-row" onclick="removeDailyRow(this)">🗑️</button>
+      </div>
+      <div style="text-align: right; font-size: 12px; color: #9ca3af; margin-top: 4px;">
+        <span class="d-mmk-text">(0 Kyats)</span>
+      </div>
+    `;
+    document.getElementById('dailyItems').appendChild(div);
+    autoSaveUserDraft();
+  }
+
+  function removeDailyRow(btn) {
+    btn.closest('.daily-item-wrapper').remove();
+    calcDaily();
+  }
+
+  function calcDaily() {
+    let totalYen = 0;
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+
+    document.querySelectorAll('.daily-item-wrapper').forEach(wrapper => {
+      const amtInput = wrapper.querySelector('.d-amount');
+      const mmkSpan = wrapper.querySelector('.d-mmk-text');
+      const val = parseFloat(amtInput ? amtInput.value : 0) || 0;
+      
+      totalYen += val;
+      const rowMMK = val * rate;
+      if (mmkSpan) mmkSpan.innerText = `(${Math.round(rowMMK).toLocaleString()} Kyats)`;
+    });
+
+    const totalMMK = totalYen * rate;
+    document.getElementById('dailyTotalYen').innerText = totalYen.toLocaleString();
+    document.getElementById('dailyTotalMMK').innerText = Math.round(totalMMK).toLocaleString();
+
+    autoSaveUserDraft();
+  }
+
+  function submitPage3() {
+    const date = document.getElementById('dailyDate').value;
+    if (!date) { alert("ရက်စွဲ ရွေးပေးပါ"); return; }
+
+    const items = [];
+    let totalYen = 0;
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 0;
+
+    document.querySelectorAll('.daily-item-wrapper').forEach(wrapper => {
+      const note = wrapper.querySelector('.d-note').value.trim() || "အထွေထွေ";
+      const amt = parseFloat(wrapper.querySelector('.d-amount').value) || 0;
+      const kyats = Math.round(amt * rate);
+      
+      if (amt > 0) {
+        items.push({ note: note, yen: amt, kyats: kyats });
+        totalYen += amt;
+      }
+    });
+
+    const totalMMK = Math.round(totalYen * rate);
+
+    const data = {
+      type: "Daily Expenses",
+      date: date,
+      items: items,
+      totalYen: totalYen,
+      totalKyats: totalMMK,
+      timestamp: new Date().toLocaleString()
+    };
+
+    db.ref('records/' + currentUser).once('value', snapshot => {
+      let updates = {};
+      if (snapshot.exists()) {
+        snapshot.forEach(child => {
+          if (child.val().type === "Daily Expenses" && child.val().date === date) {
+            updates[child.key] = null;
+          }
+        });
+      }
+
+      db.ref('records/' + currentUser).update(updates, () => {
+        db.ref('records/' + currentUser).push(data, err => {
+          if (!err) {
+            alert(date + " ရက်စွဲအတွက် စာရင်းကို အသစ်ပြင်ဆင် သိမ်းဆည်းပြီးပါပြီ!");
+          }
+        });
+      });
+    });
+  }
+
+  function switchHistoryTab(tab) {
+    document.getElementById('tabDaily').className = tab === 'daily' ? 'tab-btn active-tab' : 'tab-btn';
+    document.getElementById('tabMonthly').className = tab === 'monthly' ? 'tab-btn active-tab' : 'tab-btn';
+    
+    if (tab === 'daily') {
+      document.getElementById('historyDailyContent').classList.remove('hidden');
+      document.getElementById('historyMonthlyContent').classList.add('hidden');
+    } else {
+      document.getElementById('historyDailyContent').classList.add('hidden');
+      document.getElementById('historyMonthlyContent').classList.remove('hidden');
+    }
+  }
+
+  function loadHistory() {
+    document.getElementById('histUser').innerText = currentUser;
+    const dailyDiv = document.getElementById('historyDailyContent');
+    const monthlyDiv = document.getElementById('historyMonthlyContent');
+
+    db.ref('records/' + currentUser).on('value', snapshot => {
+      dailyDiv.innerHTML = "";
+      monthlyDiv.innerHTML = "";
+
+      if (!snapshot.exists()) {
+        dailyDiv.innerHTML = "<p style='text-align:center;'>မှတ်တမ်းများ မရှိသေးပါ။</p>";
+        monthlyDiv.innerHTML = "<p style='text-align:center;'>မှတ်တမ်းများ မရှိသေးပါ။</p>";
+        return;
+      }
+
+      let hasDaily = false;
+      let hasMonthly = false;
+
+      snapshot.forEach(child => {
+        const val = child.val();
+        
+        if (val.type === "Daily Expenses") {
+          hasDaily = true;
+          let detailsHTML = "";
+          if (val.items && val.items.length > 0) {
+            val.items.forEach(it => {
+              detailsHTML += `
+                <div class="history-detail-item">
+                  <span>• ${it.note}</span>
+                  <span><b>${(it.yen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(it.kyats || 0).toLocaleString()} Kyats)</span></span>
+                </div>
+              `;
+            });
+          }
+
+          const card = document.createElement('div');
+          card.className = 'history-card';
+          card.innerHTML = `
+            <div style="font-weight:bold; color:#38bdf8; margin-bottom:8px; border-bottom:1px solid #3f3f46; padding-bottom:4px;">
+              📅 ရက်စွဲ: ${val.date}
+            </div>
+            ${detailsHTML}
+            <div style="margin-top:10px; text-align:right; font-weight:bold; color:#10b981;">
+              စုစုပေါင်း: ${(val.totalYen || 0).toLocaleString()} Yen <span class="history-kyats-dim">(${(val.totalKyats || 0).toLocaleString()} Kyats)</span>
+            </div>
+          `;
+          dailyDiv.prepend(card);
+
+        } else if (val.type === "Monthly Summary") {
+          hasMonthly = true;
+          const card = document.createElement('div');
+          card.className = 'history-card';
+          card.innerHTML = `
+            <div style="font-weight:bold; color:#f59e0b; margin-bottom:8px; border-bottom:1px solid #3f3f46; padding-bottom:4px;">
+              🗓️ လစဉ်စာရင်း: ${val.month}
+            </div>
+            <div class="history-detail-item"><span>အသားတင်ဝင်ငွေ</span> <span><b>${(val.netIncomeYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.incomeKyats || 0).toLocaleString()} Kyats)</span></span></div>
+            <div class="history-detail-item"><span>အထွေထွေသုံးစရိတ်</span> <span><b>${(val.generalExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.generalExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
+            <div class="history-detail-item"><span>အိမ်ပေးငွေ</span> <span><b>${(val.homeExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.homeExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
+            <div class="history-detail-item"><span>အရေးပေါ်သုံးငွေ</span> <span><b>${(val.emergencyExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.emergencyExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
+            <div class="history-detail-item"><span>စုငွေ</span> <span><b>${(val.savingsYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.savingsKyats || 0).toLocaleString()} Kyats)</span></span></div>
+            <div style="margin-top:10px; text-align:right; font-weight:bold; color:#38bdf8;">
+              အပြီးသတ် ကျန်ငွေ: ${(val.remFinalYen || 0).toLocaleString()} Yen
+            </div>
+          `;
+          monthlyDiv.prepend(card);
+        }
+      });
+
+      if (!hasDaily) dailyDiv.innerHTML = "<p style='text-align:center;'>တနေ့တာ အသုံးစရိတ် မရှိသေးပါ။</p>";
+      if (!hasMonthly) monthlyDiv.innerHTML = "<p style='text-align:center;'>လစဉ်ဝင်ငွေ စာရင်း မရှိသေးပါ။</p>";
+    });
+  }
+
+  /* ADMIN PANEL LOGIC */
+  function loadAdminDashboard() {
+    const userSelect = document.getElementById('adminUserSelect');
+    
+    db.ref('users').on('value', snapshot => {
+      adminAllUsers = snapshot.val() || {};
+      userSelect.innerHTML = `<option value="">-- User တစ်ဦး ရွေးချယ်ပါ --</option>`;
+      Object.keys(adminAllUsers).forEach(uname => {
+        const opt = document.createElement('option');
+        opt.value = uname;
+        opt.textContent = "👤 " + uname;
+        userSelect.appendChild(opt);
+      });
+    });
+
+    db.ref('records').on('value', snapshot => {
+      adminAllRecords = snapshot.val() || {};
+      renderSelectedUserAdminData();
+    });
+  }
+
+  function renderSelectedUserAdminData() {
+    const selectedUser = document.getElementById('adminUserSelect').value;
+    const detailSec = document.getElementById('adminSelectedUserDetail');
+
+    if (!selectedUser) {
+      detailSec.classList.add('hidden');
+      return;
+    }
+
+    detailSec.classList.remove('hidden');
+    document.getElementById('adminUserPw').innerText = adminAllUsers[selectedUser] ? adminAllUsers[selectedUser].password : "မရှိပါ";
+
+    const userRecs = adminAllRecords[selectedUser] || {};
+    const dailyDiv = document.getElementById('adminDailyContent');
+    const monthlyDiv = document.getElementById('adminMonthlyContent');
+
+    dailyDiv.innerHTML = "";
+    monthlyDiv.innerHTML = "";
+
+    let hasDaily = false;
+    let hasMonthly = false;
+
+    Object.keys(userRecs).forEach(key => {
+      const val = userRecs[key];
+
+      if (val.type === "Daily Expenses") {
+        hasDaily = true;
+        let detailsHTML = "";
+        if (val.items && val.items.length > 0) {
+          val.items.forEach(it => {
+            detailsHTML += `
+              <div class="history-detail-item">
+                <span>• ${it.note}</span>
+                <span><b>${(it.yen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(it.kyats || 0).toLocaleString()} Kyats)</span></span>
+              </div>
+            `;
+          });
+        }
+
+        const card = document.createElement('div');
+        card.className = 'history-card';
+        card.innerHTML = `
+          <div style="font-weight:bold; color:#38bdf8; margin-bottom:8px; border-bottom:1px solid #3f3f46; padding-bottom:4px;">
+            📅 ရက်စွဲ: ${val.date}
+          </div>
+          ${detailsHTML}
+          <div style="margin-top:10px; text-align:right; font-weight:bold; color:#10b981;">
+            စုစုပေါင်း: ${(val.totalYen || 0).toLocaleString()} Yen <span class="history-kyats-dim">(${(val.totalKyats || 0).toLocaleString()} Kyats)</span>
+          </div>
+        `;
+        dailyDiv.prepend(card);
+
+      } else if (val.type === "Monthly Summary") {
+        hasMonthly = true;
+        const card = document.createElement('div');
+        card.className = 'history-card';
+        card.innerHTML = `
+          <div style="font-weight:bold; color:#f59e0b; margin-bottom:8px; border-bottom:1px solid #3f3f46; padding-bottom:4px;">
+            🗓️ လစဉ်စာရင်း: ${val.month}
+          </div>
+          <div class="history-detail-item"><span>အသားတင်ဝင်ငွေ</span> <span><b>${(val.netIncomeYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.incomeKyats || 0).toLocaleString()} Kyats)</span></span></div>
+          <div class="history-detail-item"><span>အထွေထွေသုံးစရိတ်</span> <span><b>${(val.generalExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.generalExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
+          <div class="history-detail-item"><span>အိမ်ပေးငွေ</span> <span><b>${(val.homeExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.homeExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
+          <div class="history-detail-item"><span>အရေးပေါ်သုံးငွေ</span> <span><b>${(val.emergencyExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.emergencyExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
+          <div class="history-detail-item"><span>စုငွေ</span> <span><b>${(val.savingsYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.savingsKyats || 0).toLocaleString()} Kyats)</span></span></div>
+          <div style="margin-top:10px; text-align:right; font-weight:bold; color:#38bdf8;">
+            အပြီးသတ် ကျန်ငွေ: ${(val.remFinalYen || 0).toLocaleString()} Yen
+          </div>
+        `;
+        monthlyDiv.prepend(card);
+      }
+    });
+
+    if (!hasDaily) dailyDiv.innerHTML = "<p style='text-align:center;'>တနေ့တာ အသုံးစရိတ် မရှိသေးပါ။</p>";
+    if (!hasMonthly) monthlyDiv.innerHTML = "<p style='text-align:center;'>လစဉ်ဝင်ငွေ စာရင်း မရှိသေးပါ။</p>";
+  }
+
+  function switchAdminTab(tab) {
+    document.getElementById('adminTabDaily').className = tab === 'daily' ? 'tab-btn active-tab' : 'tab-btn';
+    document.getElementById('adminTabMonthly').className = tab === 'monthly' ? 'tab-btn active-tab' : 'tab-btn';
+    
+    if (tab === 'daily') {
+      document.getElementById('adminDailyContent').classList.remove('hidden');
+      document.getElementById('adminMonthlyContent').classList.add('hidden');
+    } else {
+      document.getElementById('adminDailyContent').classList.add('hidden');
+      document.getElementById('adminMonthlyContent').classList.remove('hidden');
+    }
+  }
+
+  function logout() {
+    currentUser = "";
+    localStorage.removeItem('saved_username');
+    localStorage.removeItem('saved_password');
+
+    document.getElementById('username').value = "";
+    document.getElementById('password').value = "";
+    showPage('page1');
+  }
+</script>
+
+</body>
+</html>
