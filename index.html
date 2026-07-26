@@ -24,24 +24,74 @@
       padding: 15px;
       display: flex;
       justify-content: center;
+      position: relative;
+      overflow-x: hidden;
     }
+
+    /* Pink Glowing Orbs Falling Animation Background */
+    .sakura-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      top: -20px;
+      background: radial-gradient(circle, rgba(255,183,197,1) 0%, rgba(255,105,180,0.8) 60%, rgba(255,20,147,0.2) 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 183, 197, 0.5);
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-20px) translateX(0) scale(0.8); opacity: 0.9; }
+      50% { transform: translateY(50vh) translateX(25px) scale(1.2); opacity: 0.7; }
+      100% { transform: translateY(105vh) translateX(-25px) scale(0.6); opacity: 0.1; }
+    }
+
+    /* Japanese Sakura Branch CSS Art with Hanging Vines at Top */
+    .sakura-branch-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      pointer-events: none;
+      z-index: 998;
+      background: linear-gradient(180deg, rgba(60, 35, 25, 0.85) 0%, rgba(40, 20, 15, 0.2) 60%, transparent 100%);
+      border-bottom-right-radius: 50% 20px;
+      border-bottom-left-radius: 50% 20px;
+    }
+    .sakura-branch-top::after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 5%;
+      width: 90%;
+      height: 40px;
+      background: radial-gradient(ellipse, rgba(255,183,197,0.4) 0%, transparent 70%);
+      filter: blur(8px);
+    }
+
     .container {
       width: 100%;
       max-width: 500px;
       display: flex;
       flex-direction: column;
       min-height: 95vh;
+      position: relative;
+      z-index: 1000;
     }
     
-    /* Title Header အလှဆင်ထားသော Styling */
     .main-title {
       text-align: center;
       color: #38bdf8;
-      font-size: 20px;
+      font-size: 19px;
       margin-bottom: 20px;
       font-weight: bold;
       line-height: 1.5;
-      padding: 10px 15px;
+      padding: 12px 10px;
       background: rgba(56, 189, 248, 0.08);
       border-radius: 10px;
       border: 1px solid rgba(56, 189, 248, 0.2);
@@ -58,7 +108,6 @@
     .hidden { display: none !important; }
     h2, h3 { margin-top: 0; text-align: center; }
     
-    /* Layout Centered Title & Bottom Right Exchange Rate Box */
     .title-center-large {
       font-size: 22px;
       font-weight: bold;
@@ -119,7 +168,6 @@
       margin-bottom: 12px;
     }
 
-    /* Tab Design */
     .tab-container {
       display: flex;
       margin-bottom: 20px;
@@ -131,7 +179,7 @@
       background: none;
       border: none;
       color: var(--text-sub);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       cursor: pointer;
       border-bottom: 3px solid transparent;
@@ -189,6 +237,7 @@
     .btn-register { background: var(--success); }
     .btn-secondary { background: #3f3f46; }
     .btn-danger { background: var(--danger); }
+    .btn-skip { background: #0284c7; }
 
     .row { display: flex; gap: 10px; align-items: flex-start; }
     .row > div { flex: 1; }
@@ -225,7 +274,6 @@
       margin-left: 4px;
     }
 
-    /* Page 2 Helper Styles */
     .field-footer-info {
       display: flex;
       justify-content: space-between;
@@ -237,7 +285,6 @@
     .sub-mmk { color: #38bdf8; text-align: right; font-weight: bold; }
     .sub-dim-mmk { color: #38bdf8; font-size: 12px; margin-top: 4px; font-weight: bold; }
 
-    /* Delete Button for Page 3 */
     .btn-delete-row {
       background: var(--danger);
       color: white;
@@ -254,6 +301,26 @@
       justify-content: center;
     }
 
+    .purpose-box {
+      background: rgba(39, 39, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+    .purpose-box b { color: #38bdf8; display: block; margin-bottom: 6px; }
+    .purpose-box ul { margin: 0; padding-left: 18px; color: #d4d4d8; }
+    .purpose-box li { margin-bottom: 4px; line-height: 1.4; }
+    
+    .note-footer {
+      text-align: center;
+      font-size: 12px;
+      color: #f59e0b;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
     .footer-credit {
       text-align: center;
       font-size: 11px;
@@ -266,16 +333,19 @@
 </head>
 <body>
 
+<!-- Japanese Sakura Branch Top Art & Glowing Pink Orbs Falling -->
+<div class="sakura-branch-top"></div>
+<div class="sakura-bg" id="sakuraContainer"></div>
+
 <div class="container">
   
-  <!-- App Main Header -->
   <div class="main-title">🇲🇲 ဂျပန်ရောက်မြန်မာများအတွက် ဝင်ငွေထွက်ငွေစီမံခန့်ခွဲမှု 🇯🇵</div>
 
   <!-- PAGE 1: LOGIN / REGISTER -->
   <div id="page1" class="card">
     <div class="tab-container">
       <button id="loginTab" class="tab-btn active-tab" onclick="switchAuthTab('login')">Login (အကောင့်ဝင်ရန်)</button>
-      <button id="registerTab" class="tab-btn" onclick="switchAuthTab('register')">Register (အကောင့်သစ်ဖွင့်ရန်)</button>
+      <button id="registerTab" class="tab-btn" onclick="switchAuthTab('register')">Register (အကောင့်သစ်)</button>
     </div>
 
     <div class="input-group">
@@ -298,16 +368,30 @@
     <div id="registerSection" class="hidden">
       <button class="btn-register" onclick="handleRegister()">Register (အကောင့်သစ်ပြုလုပ်မည်)</button>
     </div>
+
+    <button class="btn-skip" onclick="handleSkipGuest()">Skip (Guest အနေဖြင့် ဝင်မည်)</button>
+
+    <!-- Purpose Box -->
+    <div class="purpose-box">
+      <b>📌 ဒီဇိုင်းရေးဆွဲရခြင်း ရည်ရွယ်ချက်များ</b>
+      <ul>
+        <li>တလစာဝင်ငွေ၊ အိမ်ပေးငွေ၊ စုငွေ တွေကို လတိုင်းပြန်ကြည့်ရအောင် သိမ်းထားနိုင်ရန်</li>
+        <li>တနေ့တာအသုံးစရိတ်များကို သေချာပြန်လည်စီစစ်ပြီး စည်းကမ်းရှိစွာသုံးနိုင်ရန်</li>
+        <li>Yen to Kyats မတွက်တတ်သေးသူများ တွက်လို့အဆင်ပြေစေရန်</li>
+      </ul>
+    </div>
+
+    <div class="note-footer">
+      ⚠️ မှတ်ချက်။ ။ Registered Users 100 ဦးသာ သုံးလို့ရပါမည်။
+    </div>
   </div>
 
   <!-- PAGE 2: MONTHLY SALARY & EXPENSES -->
   <div id="page2" class="card hidden">
     <div class="user-tag" id="userTagP2">အကောင့်အမည်: </div>
     
-    <!-- Centered Header -->
     <div class="title-center-large">လစဉ်ဝင်ငွေနှင့် အသုံးစရိတ်</div>
 
-    <!-- Bottom Right Exchange Rate Box with Small Hint Text -->
     <div class="rate-section-wrapper">
       <div class="rate-box-top">
         <div class="rate-hint-text">ဒီနေ့ပေါက်စျေးရိုက်ထည့်ပေးပါ</div>
@@ -329,7 +413,6 @@
 
     <hr style="border-color: var(--border); margin: 15px 0;">
 
-    <!-- အထွေထွေသုံးစရိတ် -->
     <div class="input-group">
       <label>အထွေထွေသုံးစရိတ် (Yen)</label>
       <input type="number" id="generalExpense" oninput="calculatePage2()" placeholder="0">
@@ -339,7 +422,6 @@
       </div>
     </div>
 
-    <!-- အိမ်ပေးငွေ -->
     <div class="input-group">
       <label>အိမ်ပေးငွေ (Yen)</label>
       <input type="number" id="homeExpense" oninput="calculatePage2()" placeholder="0">
@@ -349,7 +431,6 @@
       </div>
     </div>
 
-    <!-- အရေးပေါ်သုံးငွေ -->
     <div class="input-group">
       <label>အရေးပေါ်သုံးငွေ (Yen)</label>
       <input type="number" id="emergencyExpense" oninput="calculatePage2()" placeholder="0">
@@ -359,7 +440,6 @@
       </div>
     </div>
 
-    <!-- စုငွေ -->
     <div class="input-group">
       <label>စုငွေ (Yen)</label>
       <input type="number" id="savings" oninput="calculatePage2()" placeholder="0">
@@ -383,7 +463,9 @@
       </div>
     </div>
 
-    <button class="btn-register" onclick="submitPage2()">Submit (သိမ်းဆည်းမည်)</button>
+    <div id="submitBtnWrapperP2">
+      <button class="btn-register" onclick="submitPage2()">Submit (သိမ်းဆည်းမည်)</button>
+    </div>
     <button class="btn-login" onclick="goToPage3()">တနေ့တာအသုံးစရိတ်မှတ်ရန် (Next)</button>
     <button class="btn-secondary" style="margin-top: 15px;" onclick="logout()">Logout (ထွက်မည်)</button>
   </div>
@@ -427,7 +509,9 @@
     
     <div class="row" style="margin-top: 8px;">
       <button class="btn-secondary" style="flex: 1;" onclick="goToPage2()">Back</button>
-      <button class="btn-register" style="flex: 2;" onclick="submitPage3()">Submit (သိမ်းဆည်းမည်)</button>
+      <div id="submitBtnWrapperP3" style="flex: 2;">
+        <button class="btn-register" style="width: 100%; margin-top: 8px;" onclick="submitPage3()">Submit (သိမ်းဆည်းမည်)</button>
+      </div>
     </div>
 
     <button class="btn-login" style="margin-top: 10px;" onclick="goToHistory()">History ကြည့်ရန်</button>
@@ -454,16 +538,22 @@
     <h2>👑 Admin Dashboard</h2>
     <p style="text-align:center; margin-bottom: 15px;">Welcome, <b class="highlight">Admin (YEMINHTUT1315)</b></p>
     
+    <div style="background:#27272a; padding:12px; border-radius:8px; margin-bottom:15px; border:1px solid var(--border);">
+      <h3 style="font-size:15px; color:#38bdf8; margin-bottom:10px;">👥 Registered Users Management</h3>
+      <div id="adminUsersListContainer"></div>
+    </div>
+
     <div class="input-group">
-      <label style="color:#38bdf8; font-weight:bold;">👤 User ရွေးချယ်ပါ</label>
+      <label style="color:#38bdf8; font-weight:bold;">👤 User ရွေးချယ်၍ Data ကြည့်ရန်/ပြင်ရန်</label>
       <select id="adminUserSelect" onchange="renderSelectedUserAdminData()">
         <option value="">-- User တစ်ဦး ရွေးချယ်ပါ --</option>
       </select>
     </div>
 
     <div id="adminSelectedUserDetail" class="hidden" style="margin-top: 15px;">
-      <div style="background:#27272a; padding:12px; border-radius:8px; border-left:4px solid #f59e0b; margin-bottom:15px;">
-        🔑 Password: <b id="adminUserPw" style="color:#f59e0b; font-size:16px;"></b>
+      <div style="background:#27272a; padding:12px; border-radius:8px; border-left:4px solid #f59e0b; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center;">
+        <div>🔑 Password: <b id="adminUserPw" style="color:#f59e0b; font-size:16px;"></b></div>
+        <button class="btn-danger" style="width:auto; padding:6px 12px; margin-top:0;" onclick="adminDeleteSelectedUser()">🗑️ Delete User</button>
       </div>
 
       <div class="tab-container">
@@ -500,12 +590,30 @@
   const db = firebase.database();
 
   let currentUser = "";
+  let isGuest = false;
   const ADMIN_NAME = "YEMINHTUT1315";
   const ADMIN_PW = "085399";
   let adminAllUsers = {};
   let adminAllRecords = {};
 
-  // Window Load - Check Saved Credentials
+  // Glowing Pink Orbs Particle Generator
+  function createParticles() {
+    const container = document.getElementById('sakuraContainer');
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 8 + 4;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.left = `${Math.random() * 100}vw`;
+      p.style.animationDuration = `${Math.random() * 6 + 4}s`;
+      p.style.animationDelay = `${Math.random() * 5}s`;
+      container.appendChild(p);
+    }
+  }
+  createParticles();
+
   window.addEventListener('DOMContentLoaded', () => {
     const savedUser = localStorage.getItem('saved_username');
     const savedPw = localStorage.getItem('saved_password');
@@ -539,6 +647,16 @@
       document.getElementById(p).classList.add('hidden');
     });
     document.getElementById(pageId).classList.remove('hidden');
+
+    const sak = document.getElementById('sakuraContainer');
+    const branch = document.querySelector('.sakura-branch-top');
+    if (pageId === 'page1') {
+      sak.style.display = 'block';
+      if(branch) branch.style.display = 'block';
+    } else {
+      sak.style.display = 'none';
+      if(branch) branch.style.display = 'none';
+    }
   }
 
   function togglePassword() {
@@ -580,6 +698,7 @@
 
     if (name === ADMIN_NAME && pw === ADMIN_PW) {
       currentUser = ADMIN_NAME;
+      isGuest = false;
       showPage('adminPage');
       loadAdminDashboard();
       return;
@@ -588,12 +707,14 @@
     db.ref('users/' + name).once('value', snapshot => {
       if (snapshot.exists() && snapshot.val().password === pw) {
         currentUser = name;
+        isGuest = false;
         
-        // Save Credentials to LocalStorage
         localStorage.setItem('saved_username', name);
         localStorage.setItem('saved_password', pw);
 
         document.getElementById('userTagP2').innerText = "အကောင့်အမည်: " + currentUser;
+        document.getElementById('submitBtnWrapperP2').classList.remove('hidden');
+        document.getElementById('submitBtnWrapperP3').classList.remove('hidden');
         showPage('page2');
         loadUserDraftData();
       } else {
@@ -602,9 +723,17 @@
     });
   }
 
-  /* --- AUTO SAVE STATE (LOCALSTORAGE) WITH PAGE 3 DRAFTS --- */
+  function handleSkipGuest() {
+    currentUser = "Guest";
+    isGuest = true;
+    document.getElementById('userTagP2').innerText = "အကောင့်အမည်: Guest (View Only)";
+    document.getElementById('submitBtnWrapperP2').classList.add('hidden');
+    document.getElementById('submitBtnWrapperP3').classList.add('hidden');
+    showPage('page2');
+  }
+
   function autoSaveUserDraft() {
-    if (!currentUser || currentUser === ADMIN_NAME) return;
+    if (!currentUser || currentUser === ADMIN_NAME || isGuest) return;
 
     const dailyItemsData = [];
     document.querySelectorAll('#dailyItems .daily-item-wrapper').forEach(wrapper => {
@@ -631,7 +760,7 @@
   }
 
   function loadUserDraftData() {
-    if (!currentUser || currentUser === ADMIN_NAME) return;
+    if (!currentUser || currentUser === ADMIN_NAME || isGuest) return;
 
     const draft = JSON.parse(localStorage.getItem(`draft_${currentUser}`));
     if (draft) {
@@ -726,6 +855,7 @@
   }
 
   function submitPage2() {
+    if (isGuest) return;
     const month = document.getElementById('selectedMonth').value;
     if (!month) { alert("လ နှင့် ခုနှစ် ရွေးပေးပါ"); return; }
 
@@ -785,6 +915,10 @@
   function goToPage3() { showPage('page3'); }
   function goToPage2() { showPage('page2'); }
   function goToHistory() {
+    if (isGuest) {
+      alert("Guest အနေဖြင့် မှတ်တမ်းကြည့်၍မရပါ။");
+      return;
+    }
     showPage('historyPage');
     loadHistory();
   }
@@ -838,6 +972,7 @@
   }
 
   function submitPage3() {
+    if (isGuest) return;
     const date = document.getElementById('dailyDate').value;
     if (!date) { alert("ရက်စွဲ ရွေးပေးပါ"); return; }
 
@@ -977,15 +1112,39 @@
   /* ADMIN PANEL LOGIC */
   function loadAdminDashboard() {
     const userSelect = document.getElementById('adminUserSelect');
+    const usersContainer = document.getElementById('adminUsersListContainer');
     
     db.ref('users').on('value', snapshot => {
       adminAllUsers = snapshot.val() || {};
       userSelect.innerHTML = `<option value="">-- User တစ်ဦး ရွေးချယ်ပါ --</option>`;
-      Object.keys(adminAllUsers).forEach(uname => {
+      usersContainer.innerHTML = "";
+
+      const userKeys = Object.keys(adminAllUsers);
+      if (userKeys.length === 0) {
+        usersContainer.innerHTML = "<p style='font-size:13px; text-align:center; color:#9ca3af;'>Registered users မရှိသေးပါ။</p>";
+      }
+
+      userKeys.forEach(uname => {
         const opt = document.createElement('option');
         opt.value = uname;
         opt.textContent = "👤 " + uname;
         userSelect.appendChild(opt);
+
+        const item = document.createElement('div');
+        item.style.display = "flex";
+        item.style.justifyContent = "space-between";
+        item.style.alignItems = "center";
+        item.style.padding = "6px 0";
+        item.style.borderBottom = "1px solid #3f3f46";
+        item.style.fontSize = "13px";
+        item.innerHTML = `
+          <span>👤 <b>${uname}</b> (PW: ${adminAllUsers[uname].password})</span>
+          <div>
+            <button class="btn-secondary" style="width:auto; padding:4px 8px; margin-top:0; font-size:12px;" onclick="adminEditUser('${uname}')">Edit</button>
+            <button class="btn-danger" style="width:auto; padding:4px 8px; margin-top:0; font-size:12px;" onclick="adminDeleteSpecificUser('${uname}')">Delete</button>
+          </div>
+        `;
+        usersContainer.appendChild(item);
       });
     });
 
@@ -993,6 +1152,37 @@
       adminAllRecords = snapshot.val() || {};
       renderSelectedUserAdminData();
     });
+  }
+
+  function adminEditUser(uname) {
+    const newPw = prompt(`User (${uname}) အတွက် Password အသစ် (ဂဏန်း ၆ လုံး) ထည့်ပါ:`, adminAllUsers[uname]?.password || "");
+    if (newPw) {
+      if (newPw.length !== 6 || isNaN(newPw)) {
+        alert("Password သည် ဂဏန်း ၆ လုံး ဖြစ်ရပါမည်။");
+        return;
+      }
+      db.ref('users/' + uname).update({ password: newPw }, err => {
+        if (!err) alert("Password ပြင်ဆင်ပြီးပါပြီ။");
+      });
+    }
+  }
+
+  function adminDeleteSpecificUser(uname) {
+    if (confirm(`User (${uname}) နှင့် ၎င်း၏ ဒေတာအားလုံးကို ဖျက်ရန် သေချာပါသလား?`)) {
+      db.ref('users/' + uname).remove();
+      db.ref('records/' + uname).remove(() => {
+        alert("အောင်မြင်စွာ ဖျက်ပြီးပါပြီ။");
+        document.getElementById('adminSelectedUserDetail').classList.add('hidden');
+        document.getElementById('adminUserSelect').value = "";
+      });
+    }
+  }
+
+  function adminDeleteSelectedUser() {
+    const selectedUser = document.getElementById('adminUserSelect').value;
+    if (selectedUser) {
+      adminDeleteSpecificUser(selectedUser);
+    }
   }
 
   function renderSelectedUserAdminData() {
@@ -1037,8 +1227,9 @@
         const card = document.createElement('div');
         card.className = 'history-card';
         card.innerHTML = `
-          <div style="font-weight:bold; color:#38bdf8; margin-bottom:8px; border-bottom:1px solid #3f3f46; padding-bottom:4px;">
-            📅 ရက်စွဲ: ${val.date}
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #3f3f46; padding-bottom:4px; margin-bottom:8px;">
+            <span style="font-weight:bold; color:#38bdf8;">📅 ရက်စွဲ: ${val.date}</span>
+            <button class="btn-danger" style="width:auto; padding:2px 6px; margin-top:0; font-size:11px;" onclick="adminDeleteRecord('${selectedUser}', '${key}')">Delete</button>
           </div>
           ${detailsHTML}
           <div style="margin-top:10px; text-align:right; font-weight:bold; color:#10b981;">
@@ -1052,8 +1243,9 @@
         const card = document.createElement('div');
         card.className = 'history-card';
         card.innerHTML = `
-          <div style="font-weight:bold; color:#f59e0b; margin-bottom:8px; border-bottom:1px solid #3f3f46; padding-bottom:4px;">
-            🗓️ လစဉ်စာရင်း: ${val.month}
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #3f3f46; padding-bottom:4px; margin-bottom:8px;">
+            <span style="font-weight:bold; color:#f59e0b;">🗓️ လစဉ်စာရင်း: ${val.month}</span>
+            <button class="btn-danger" style="width:auto; padding:2px 6px; margin-top:0; font-size:11px;" onclick="adminDeleteRecord('${selectedUser}', '${key}')">Delete</button>
           </div>
           <div class="history-detail-item"><span>အသားတင်ဝင်ငွေ</span> <span><b>${(val.netIncomeYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.incomeKyats || 0).toLocaleString()} Kyats)</span></span></div>
           <div class="history-detail-item"><span>အထွေထွေသုံးစရိတ်</span> <span><b>${(val.generalExpenseYen || 0).toLocaleString()} Yen</b> <span class="history-kyats-dim">(${(val.generalExpenseKyats || 0).toLocaleString()} Kyats)</span></span></div>
@@ -1072,6 +1264,14 @@
     if (!hasMonthly) monthlyDiv.innerHTML = "<p style='text-align:center;'>လစဉ်ဝင်ငွေ စာရင်း မရှိသေးပါ။</p>";
   }
 
+  function adminDeleteRecord(uname, recordKey) {
+    if (confirm("ဒီမှတ်တမ်းကို ဖျက်ရန် သေချာပါသလား?")) {
+      db.ref(`records/${uname}/${recordKey}`).remove(() => {
+        alert("မှတ်တမ်း ဖျက်ပြီးပါပြီ။");
+      });
+    }
+  }
+
   function switchAdminTab(tab) {
     document.getElementById('adminTabDaily').className = tab === 'daily' ? 'tab-btn active-tab' : 'tab-btn';
     document.getElementById('adminTabMonthly').className = tab === 'monthly' ? 'tab-btn active-tab' : 'tab-btn';
@@ -1087,6 +1287,7 @@
 
   function logout() {
     currentUser = "";
+    isGuest = false;
     localStorage.removeItem('saved_username');
     localStorage.removeItem('saved_password');
 
